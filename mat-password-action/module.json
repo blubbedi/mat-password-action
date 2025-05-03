@@ -1,0 +1,21 @@
+
+{
+  "name": "mat-password-action",
+  "title": "MAT Passwort-Aktion",
+  "description": "Fügt eine Passwort-Abfrage als Trigger-Aktion in Monk’s Active Tile Triggers hinzu.",
+  "version": "1.0.0",
+  "author": "Dein Name",
+  "minimumCoreVersion": "11",
+  "compatibleCoreVersion": "11",
+  "scripts": ["scripts/password-action.js"],
+  "dependencies": [
+    {
+      "name": "monks-active-tiles",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/ironmonk88/monks-active-tiles/main/module.json"
+    }
+  ],
+  "url": "https://github.com/dein-name/mat-password-action",
+  "manifest": "https://raw.githubusercontent.com/dein-name/mat-password-action/main/module.json",
+  "download": "https://github.com/dein-name/mat-password-action/archive/refs/heads/main.zip"
+}
