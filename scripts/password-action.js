@@ -1,14 +1,15 @@
-console.log("📦 Passwort-Modul wird geladen...");
 Hooks.once("ready", () => {
+  console.log("📦 Passwort-Modul wird geladen...");
   console.log("✅ [MAT Passwort-Modul] Foundry ready.");
   console.log("✅ [MAT Passwort-Modul] MAT geladen:", !!game.MonksActiveTiles);
-});
 
-Hooks.once("monks-active-tiles.registerActions", () => {
-  console.log("🔐 [MAT Passwort-Modul] Registrierung der Passwort-Aktion gestartet.");
+  if (!game.MonksActiveTiles) {
+    console.warn("⚠️ MAT nicht gefunden – Aktion wird nicht registriert.");
+    return;
+  }
 
   game.MonksActiveTiles.registerAction("password-check", {
-    label: "Passwort-Eingabe", // Name im MAT-Menü
+    label: "Passwort-Eingabe",
     icon: "icons/skills/social/intimidation-impressing.webp",
     permission: "OBSERVER",
 
@@ -31,7 +32,7 @@ Hooks.once("monks-active-tiles.registerActions", () => {
 
     handler: async ({ tile, token, trigger }) => {
       if (!token || !trigger?.data?.password) {
-        console.warn("🚫 [MAT Passwort-Modul] Kein Token oder Passwort konfiguriert.");
+        console.warn("🚫 Kein Token oder kein Passwort konfiguriert.");
         return false;
       }
 
@@ -62,17 +63,17 @@ Hooks.once("monks-active-tiles.registerActions", () => {
       });
 
       if (input === null) {
-        console.log("🚫 [MAT Passwort-Modul] Eingabe abgebrochen.");
+        console.log("🚫 Eingabe abgebrochen.");
         return false;
       }
 
       if (input === expectedPassword) {
         ui.notifications.info("Zugang gewährt.");
-        console.log("✅ [MAT Passwort-Modul] Passwort korrekt.");
+        console.log("✅ Passwort korrekt.");
         return true;
       } else {
         ui.notifications.error("Falsches Passwort.");
-        console.warn("🚫 [MAT Passwort-Modul] Falsches Passwort eingegeben.");
+        console.warn("🚫 Passwort falsch.");
         return false;
       }
     }
