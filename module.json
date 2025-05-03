@@ -16,6 +16,6 @@
     }
   ],
   "url": "https://github.com/dein-name/mat-password-action",
-  "manifest": "https://raw.githubusercontent.com/dein-name/mat-password-action/main/module.json",
-  "download": "https://github.com/dein-name/mat-password-action/archive/refs/heads/main.zip"
+  "manifest": "https://raw.githubusercontent.com/blubbedi/mat-password-action/main/module.json",
+  "download": "https://github.com/blubbedi/mat-password-action/archive/refs/heads/main.zip"
 }
