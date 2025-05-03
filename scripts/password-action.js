@@ -1,7 +1,13 @@
+Hooks.once("ready", () => {
+  console.log("✅ [MAT Passwort-Modul] Foundry ready.");
+  console.log("✅ [MAT Passwort-Modul] MAT geladen:", !!game.MonksActiveTiles);
+});
 
 Hooks.once("monks-active-tiles.registerActions", () => {
+  console.log("🔐 [MAT Passwort-Modul] Registrierung der Passwort-Aktion gestartet.");
+
   game.MonksActiveTiles.registerAction("password-check", {
-    label: "Passwort-Eingabe",
+    label: "Passwort-Eingabe", // Name im MAT-Menü
     icon: "icons/skills/social/intimidation-impressing.webp",
     permission: "OBSERVER",
 
@@ -10,7 +16,7 @@ Hooks.once("monks-active-tiles.registerActions", () => {
         html: `
           <div class="form-group">
             <label>Geheimes Passwort</label>
-            <input type="text" name="password" value="${current.password || ""}"/>
+            <input type="text" name="password" value="${current.password || ""}" />
           </div>
         `,
         update: (form) => {
@@ -22,8 +28,11 @@ Hooks.once("monks-active-tiles.registerActions", () => {
       };
     },
 
-    handler: async ({tile, token, trigger}) => {
-      if (!token || !trigger?.data?.password) return;
+    handler: async ({ tile, token, trigger }) => {
+      if (!token || !trigger?.data?.password) {
+        console.warn("🚫 [MAT Passwort-Modul] Kein Token oder Passwort konfiguriert.");
+        return false;
+      }
 
       const expectedPassword = trigger.data.password;
 
@@ -51,14 +60,22 @@ Hooks.once("monks-active-tiles.registerActions", () => {
         }).render(true);
       });
 
-      if (input === null) return;
+      if (input === null) {
+        console.log("🚫 [MAT Passwort-Modul] Eingabe abgebrochen.");
+        return false;
+      }
+
       if (input === expectedPassword) {
         ui.notifications.info("Zugang gewährt.");
+        console.log("✅ [MAT Passwort-Modul] Passwort korrekt.");
         return true;
       } else {
         ui.notifications.error("Falsches Passwort.");
+        console.warn("🚫 [MAT Passwort-Modul] Falsches Passwort eingegeben.");
         return false;
       }
     }
   });
+
+  console.log("✅ [MAT Passwort-Modul] Aktion 'password-check' registriert.");
 });
