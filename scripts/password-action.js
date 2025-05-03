@@ -1,5 +1,13 @@
 console.log("📦 Passwort-Modul wird geladen...");
 
+// Prüfen, ob MAT aktiv ist
+Hooks.once("ready", () => {
+  if (!game.modules.get("monks-active-tiles")?.active) {
+    console.warn("⚠️ MAT ist nicht aktiv – Passwort-Aktion kann nicht registriert werden.");
+  }
+});
+
+// Aktion registrieren, sobald MAT bereit ist
 Hooks.once("monks-active-tiles.registerActions", () => {
   console.log("✅ [MAT Passwort-Modul] Aktion wird registriert...");
 
