@@ -1,3 +1,4 @@
+console.log("📦 Passwort-Modul wird geladen...");
 Hooks.once("ready", () => {
   console.log("✅ [MAT Passwort-Modul] Foundry ready.");
   console.log("✅ [MAT Passwort-Modul] MAT geladen:", !!game.MonksActiveTiles);
