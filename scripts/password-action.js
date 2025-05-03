@@ -1,12 +1,7 @@
-Hooks.once("ready", () => {
-  console.log("📦 Passwort-Modul wird geladen...");
-  console.log("✅ [MAT Passwort-Modul] Foundry ready.");
-  console.log("✅ [MAT Passwort-Modul] MAT geladen:", !!game.MonksActiveTiles);
+console.log("📦 Passwort-Modul wird geladen...");
 
-  if (!game.MonksActiveTiles) {
-    console.warn("⚠️ MAT nicht gefunden – Aktion wird nicht registriert.");
-    return;
-  }
+Hooks.once("monks-active-tiles.registerActions", () => {
+  console.log("✅ [MAT Passwort-Modul] Aktion wird registriert...");
 
   game.MonksActiveTiles.registerAction("password-check", {
     label: "Passwort-Eingabe",
